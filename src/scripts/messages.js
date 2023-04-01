@@ -1,9 +1,8 @@
-// Responsibility: Generate the HTML for all completed potions and elixirs
-import { getMessages, getUsers, saveMessage } from "./dataAccess.js"
+// Responsibility: Generate the HTML for chat and new message section
+import { getMessages, saveMessage } from "./dataAccess.js"
 
-export const createMessageList = () => {
+export const createMessageModule = () => {
 const messages = getMessages()
-const users = getUsers()
 
 return `<h3>Chat</h3>
         <div id="message-list">
@@ -14,30 +13,39 @@ return `<h3>Chat</h3>
                         </div>`}).join("")
             }
         </div>
-        <div id="new-message-container">
 
+        <div id="new-message-container">
             <label class="label" for="purpose"><h3>New Message</h3></label>
             <textarea id="new-message-input" name="new-message-input" rows="10" cols="50"></textarea>
-            </br>
-            <label class="label" for="name">User Name</label>
-            <input type="text" id="new-message-username" class="input">
-
-            <button class="button" id="new-message-button">Send</button>
-        
-        `
+            <label class="label" for="name"><h3>User Name</h3></label>
+            <input type="text" id="new-message-username" class="input"></input>
+            <button class="button" id="new-message-save-button">Send</button>
+        </div>`
 }
 
 // lets listen for the click of the send message button
 document.querySelector("#dashboard").addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "new-message-button") {
+    if (clickEvent.target.id === "new-message-save-button") {
 
-        // Create a message object out of the user inputs
-        const newMessageData = {
-            userName: document.querySelector('input[id="new-message-username"]').value,
-            message: document.querySelector('textarea[name="new-message-input"]').value
+        //grab userName and userMessage
+        const userName = document.querySelector('input[id="new-message-username"]').value
+        const userMessage = document.querySelector('textarea[name="new-message-input"]').value
+
+        //make sure username and message not blank, and let user know if they are
+        if(!userName || !userMessage){
+            window.alert('Please enter a user name and message before hitting send')
+            return
         }
 
-        // Send the message object to the API for permanent storage
-        saveMessage(newMessageData)
+        // Create a message object out of the user inputs
+        else{
+            const newMessageObject = {
+                userName: userName,
+                message: userMessage
+            }
+
+            // Send the message object to the API for permanent storage
+            saveMessage(newMessageObject)
+        }
     }
 })
