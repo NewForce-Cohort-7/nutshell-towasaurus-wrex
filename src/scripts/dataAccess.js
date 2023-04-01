@@ -95,11 +95,11 @@ export const deleteImage = (id) => {
         )
 }
 
-export const saveImage = (imageObject) => {
+export const saveImage = (newImageObject) => {
     const fetchOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(imageObject)
+        body: JSON.stringify(newImageObject)
     }
 
     return fetch(`${API}/photos`, fetchOptions)
