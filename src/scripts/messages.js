@@ -27,24 +27,24 @@ return `<h3>Chat</h3>
 document.querySelector("#dashboard").addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "new-message-save-button") {
 
-        //grab userName and userMessage
+        // grab userName and userMessage
         const userName = document.querySelector('input[id="new-message-username"]').value
         const userMessage = document.querySelector('textarea[name="new-message-input"]').value
 
-        //make sure username and message not blank, and let user know if they are
+        // make sure username and message not blank, and let user know if they are
         if(!userName || !userMessage){
             window.alert('Please enter a user name and message before hitting send')
             return
         }
 
-        // Create a message object out of the user inputs
+        // create a message object out of the user inputs
         else{
             const newMessageObject = {
                 userName: userName,
                 message: userMessage
             }
 
-            // Send the message object to the API for permanent storage
+            // send the message object to the API for permanent storage
             saveMessage(newMessageObject)
         }
     }

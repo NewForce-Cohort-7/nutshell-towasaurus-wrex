@@ -88,11 +88,9 @@ export const saveMessage = (message) => {
 
 export const deleteImage = (id) => {
     return fetch(`${API}/photos/${id}`, { method: "DELETE" })
-        .then(
-            () => {
-                dashboard.dispatchEvent(new CustomEvent("stateChanged"))
-            }
-        )
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
 }
 
 export const saveImage = (newImageObject) => {
