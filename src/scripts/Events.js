@@ -2,13 +2,13 @@ import { getEvents, saveEvent, deleteEvent } from "./dataAccess.js";
 
 const mainContainer = document.querySelector("#dashboard")
 
-
+// click event that shows the new event form HTML
 dashboard.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "createNewEvent") {
         document.querySelector("#new-event-form").innerHTML = eventForm()
     }
 })
-  
+  //click event that deletes and event
 dashboard.addEventListener("click", clickEvent => {
     if(clickEvent.target.id.startsWith("delete-event--")){ 
         deleteEvent(parseInt(clickEvent.target.value))
