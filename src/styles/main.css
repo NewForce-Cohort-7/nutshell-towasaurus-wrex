@@ -82,3 +82,11 @@
     overflow-y: scroll;
     width: 250px;
 }
+
+/*****************
+ ARTICLES CSS 
+ *****************/
+/* this toggles the form display */
+.hidden {
+    display: none;
+}

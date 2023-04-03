@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Joel",
+      "email": "joel@yahoo.com"
+    }
+  ],
+  "articles": [
+    {
+      "title": "thhetj",
+      "url": "gskdksg",
+      "synopsis": "gkskg",
+      "date": "2023-04-03",
+      "id": 3
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "name": "Party a the docks",
+      "date": "08/04/2029",
+      "location": "313 Runners Row"
+    }
+  ],
+  "tasks": [],
+  "messages": [
+    {
+      "id": 1,
+      "userId": 1,
+      "message": "What's up?"
+    }
+  ],
+  "photos": [
+    {
+      "id": 1,
+      "url": "www.photos.com",
+      "caption": "Look at me!",
+      "date": "03/15/1999"
+    }
+  ]
+}
