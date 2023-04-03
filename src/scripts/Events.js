@@ -7,10 +7,8 @@ dashboard.addEventListener("click", clickEvent => {
         document.querySelector("#dashboard").innerHTML = eventForm()
     }
 })
-
-const Events = () => {
-    
-    const listOfEvents = (event) => {
+  
+export const listOfEvents = (event) => {
         const events = getEvents()
         return `
         ${events.map(event => {
@@ -19,10 +17,12 @@ const Events = () => {
                 <div class="event-date">${event.date}</div>
                 <div class="event-location">${event.location}</div>
                 </div>`
-        })}
+        }).join("")
+    }
+    <button class="button" id="newEvent-button">Create New Event</button>
         `
     }
-}
+
 // Create button to create event
 // Create form to add event
 // Create button to save event to API
