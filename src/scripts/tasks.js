@@ -1,4 +1,4 @@
-import { getTasks, sendTask, deleteTask } from "./dataAccess.js";
+import { getTasks, sendTask, markTaskComplete } from "./dataAccess.js";
 
 const dashboard = document.querySelector("#dashboard")
 
@@ -42,18 +42,33 @@ dashboard.addEventListener("click", event => {
 export const createTaskBox = () => {
 const tasks = getTasks()
 return`
+
+<h3>Incomplete Tasks</h3>
+
 ${tasks.map(task => {
-    if(task.complete){
-        return 
+    if(!task.complete){ 
+        return `<div class="taskContainer" id="${task.id}">
+            <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
+            <div class="task-date-container"><p class="task-date">${task.date}</p></div>
+            <input type="checkbox" class="checkbox" id="completeTask--${task.id}"></input>
+            </div>`
     }
-
-
-    return `<div class="taskContainer" id="${task.id}">
-                <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
-                <div class="task-date-container"><p class="task-date">${task.date}</p></div>
-                <input type="checkbox" class="checkbox" id="completeTask--${task.id}"></input>
-            </div>`}).join("")
+}).join("")
 }
+
+<h3>Complete Tasks</h3>
+
+${tasks.map(task => {
+    if(task.complete){ 
+        return `<div class="taskContainer" id="${task.id}">
+            <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
+            <div class="task-date-container"><p class="task-date">${task.date}</p></div>
+            </div>`
+    }
+}).join("")
+}
+
+
 <div id="textBoxHere"></div>
 <div id="taskBox">
 <button class="button" id="createTaskButton">Create A New Task</button>
