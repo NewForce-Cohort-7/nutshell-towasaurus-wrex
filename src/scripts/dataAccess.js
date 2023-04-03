@@ -9,7 +9,8 @@ const applicationState = {
     events: [],
     tasks: [],
     messages: [],
-    photos: []
+    photos: [],
+
 };
 
 export const fetchUsers = () => {
@@ -53,8 +54,52 @@ export const fetchTasks = () => {
         .then((responseArray) => { applicationState.tasks = responseArray })
 }
 
+//TASKS
+
 export const getTasks = () => {
     return applicationState.tasks.map(obj => ({ ...obj }))
+}
+
+export const sendTask = (taskData) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(taskData)
+    }
+
+
+    return fetch(`${API}/tasks`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const deleteTask = (id) => {
+    return fetch(`${API}/tasks/${id}`, { method: "DELETE" })
+        .then(
+            () => {
+                mainContainer.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
+}
+
+export const markTaskComplete = (id) => {
+
+    //update API with complete attribute marked true with PATCH fetch method
+    fetch(`${API}/tasks/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          complete: true,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then(() => dashboard.dispatchEvent(new CustomEvent("stateChanged")));
 }
 
 export const fetchMessages = () => {
