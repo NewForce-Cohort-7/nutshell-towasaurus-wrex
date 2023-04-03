@@ -86,5 +86,33 @@ export const saveMessage = (message) => {
         })
 }
 
+export const deleteMessage = (id) => {
+    return fetch(`${API}/messages/${id}`, { method: "DELETE" })
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const deleteImage = (id) => {
+    return fetch(`${API}/photos/${id}`, { method: "DELETE" })
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const saveImage = (newImageObject) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(newImageObject)
+    }
+
+    return fetch(`${API}/photos`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
 
 
