@@ -1,3 +1,5 @@
+@import "./events.css";
+
 ::-webkit-scrollbar {width: 13px}
 ::-webkit-scrollbar-track {background: white}
 ::-webkit-scrollbar-thumb {background: #462F77}

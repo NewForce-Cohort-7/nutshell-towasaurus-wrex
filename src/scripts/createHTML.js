@@ -1,3 +1,4 @@
+import { listOfEvents } from "./Events.js"
 import { createImageModule } from "./images.js"
 import { createMessageModule } from "./messages.js"
 
@@ -7,6 +8,6 @@ export const createHTML = () => {
       
       ${createImageModule()}
       ${createMessageModule()}
-      
+      ${listOfEvents()}
       `
 }

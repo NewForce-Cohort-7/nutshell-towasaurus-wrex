@@ -39,7 +39,12 @@ export const fetchEvents = () => {
 }
 
 export const getEvents = () => {
-    return applicationState.events.map(obj => ({ ...obj }))
+    let jumbledEvents = applicationState.events.map(obj => ({ ...obj }))
+    let sortedEvents = jumbledEvents.sort((a , b) =>
+    new Date(a.date) - new Date(b.date)
+    )
+    // console.log(sortedEvents)
+    return sortedEvents
 }
 
 export const fetchTasks = () => {
@@ -128,3 +133,9 @@ export const saveEvent = (event) => {
             })
 }
 
+export const deleteEvent = (id) => {
+    return fetch(`${API}/events/${id}`, { method: "DELETE" })
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
