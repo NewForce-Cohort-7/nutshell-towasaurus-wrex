@@ -29,6 +29,13 @@
       "id": 1,
       "userId": 1,
       "message": "What's up?"
+    },
+    {
+      "userName": "test",
+      "message": "test",
+      "thumbsUp": 1,
+      "thumbsDown": 8,
+      "id": 2
     }
   ],
   "photos": [
