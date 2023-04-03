@@ -1,19 +1,31 @@
 // Responsibility: Creates and adds new featured articles. Can also delete them or open in a new window. Sorted by most recently added.
 import { getArticles, saveArticles, deleteArticles } from "./dataAccess.js"
 
+let selectedTag = null;
+
 // Generate HTML for the list of articles, sorted by most recent date
 const articleList = () => {
     const articles = getArticles();
-    return articles.map(article => `
-        <div class="article">
-            <h3>${article.title}</h3>
-            <p class="articleDate">${article.date}</p>
-            <p>${article.synopsis}</p>
-            <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
-            <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
-        </div>
-    `).join("")
-}
+    const filteredArticles = selectedTag
+        ? articles.filter(article => article.tags && article.tags.includes(selectedTag))
+        : articles;
+
+    return filteredArticles.map(article => {
+        const tagButtons = (article.tags && article.tags.length > 0) 
+            ? article.tags.map(tag => `<button class="tag" data-tag="${tag}">${tag}</button>`).join("")
+            : "";
+        return `
+            <div class="article">
+                <h3>${article.title} ${tagButtons}</h3>
+                <p class="articleDate">${article.date}</p>
+                <p>${article.synopsis}</p>
+                <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
+                <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
+            </div>
+        `;
+    }).join("");
+};
+
 
 // Toggle visibility of the article form
 const toggleArticleForm = () => {
@@ -29,22 +41,29 @@ const saveArticleHandler = (event) => {
     const url = document.querySelector("#articleUrl").value;
     const synopsis = document.querySelector("#articleSynopsis").value;
     const date = new Date().toISOString().split('T')[0];
+    const tags = document.querySelector("#articleTags").value.split(',').map(tag => tag.trim());
 
-    const newArticle = { title, url, synopsis, date };
+
+    const newArticle = { title, url, synopsis, date, tags };
     saveArticles(newArticle);
 }
 
-// Handle click events for adding, saving, and deleting articles
-document.addEventListener("click", event => {
-    if (event.target.id === "addNewArticle") {
-        toggleArticleForm();
-    } else if (event.target.id === "saveArticle") {
-        saveArticleHandler(event);
-    } else if (event.target.classList.contains("deleteArticle")) {
-        const articleId = parseInt(event.target.dataset.id);
-        deleteArticles(articleId);
-    }
-})
+// Initialize event listeners
+const initEventListeners = () => {
+    document.addEventListener("click", event => {
+        if (event.target.id === "addNewArticle") {
+            toggleArticleForm();
+        } else if (event.target.id === "saveArticle") {
+            saveArticleHandler(event);
+        } else if (event.target.classList.contains("deleteArticle")) {
+            const articleId = parseInt(event.target.dataset.id);
+            deleteArticles(articleId);
+        } else if (event.target.classList.contains("tag")) {
+            const tag = event.target.dataset.tag;
+            filterArticlesByTag(tag);
+        }
+    });
+}
 
 // Generate the complete Articles component HTML
 export const Articles = () => {
@@ -60,8 +79,20 @@ export const Articles = () => {
                 <input type="text" id="articleUrl" required>
                 <label for="articleSynopsis">Synopsis</label>
                 <input type="text" id="articleSynopsis" required>
+                <label for="articleTags">Tags</label>
+                <input type="text" id="articleTags" placeholder="tag1, tag2, tag3">
                 <button id="saveArticle">Add Article</button>
             </form>
         </div>
     `
 }
+
+
+
+const filterArticlesByTag = (tag) => {
+    selectedTag = tag;
+    document.querySelector("#articles").innerHTML = Articles();
+    initEventListeners(); // Re-attach event listeners after updating the inner HTML
+}
+
+initEventListeners();
