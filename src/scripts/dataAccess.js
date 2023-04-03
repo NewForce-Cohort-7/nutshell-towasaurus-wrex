@@ -86,5 +86,17 @@ export const saveMessage = (message) => {
         })
 }
 
+export const saveEvent = (event) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(event)
+    }
 
+    return fetch(`${API}/events`, fetchOptions)
+            .then(response => response.json)
+            .then(() => {
+                dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+            })
+}
 
