@@ -1,3 +1,51 @@
+::-webkit-scrollbar {width: 13px}
+::-webkit-scrollbar-track {background: white}
+::-webkit-scrollbar-thumb {background: #462F77}
+
+
+#images-module{
+    border: thin solid blue;
+    padding: 20px;
+    width: 620px;
+}
+
+#images-grid{
+    flex-wrap: wrap;
+}
+
+.image{
+    width: 100px;
+}
+
+#images-grid, .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.image-container{
+    flex-direction: column;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    border: thin solid #462F77;
+}
+
+.image-delete-button{
+    margin: 10px;
+    width: 50px;
+}
+
+#new-image-form{
+    padding: 10px;
+    width:600px;
+}
+
+#new-image-save-button{
+    margin-bottom: 20px;
+}
+
 .message-name{
     font-weight: bold;
     padding: 5px;
@@ -9,7 +57,7 @@
     padding: 10px;
     margin-left: 5px;
     word-wrap:normal;
-    width: 250px;
+    width: 200px;
 }
 
 .message-text {
@@ -19,20 +67,16 @@
 #new-message-container{
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 270px;
 }
 
-#new-message-username{
-    width: 250px;
-}
-
-#new-message-button{
+#new-message-save-button{
     margin-top: 20px;
     width: 100px;
 }
 
 #message-list{
-    border: thin solid red;
+    border: thin solid #462F77;
     padding: 10px;
     height: 400px;
     overflow-y: scroll;
