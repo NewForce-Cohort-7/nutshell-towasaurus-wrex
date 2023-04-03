@@ -1,4 +1,4 @@
-import { getTasks, sendTask } from "./dataAccess.js";
+import { getTasks, sendTask, deleteTask } from "./dataAccess.js";
 
 const dashboard = document.querySelector("#dashboard")
 
@@ -54,7 +54,3 @@ ${tasks.map(task => {
 </div>
 `
 }
-
-dashboard.addEventListener("change", event => {
-    
-})

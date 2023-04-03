@@ -5,9 +5,9 @@ import { createTaskBox } from "./tasks.js"
 export const createHTML = () => {
       // Render all your UI components here
       return `
-      ${createTaskBox()}
+     
       ${createImageModule()}
       ${createMessageModule()}
-      
+      ${createTaskBox()}
       `
 }
