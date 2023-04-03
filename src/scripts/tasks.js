@@ -10,7 +10,8 @@ dashboard.addEventListener("click", clickEvent => {
 
         const toAPI = {
             description: newTaskText,
-            date: newTaskDate
+            date: newTaskDate,
+            complete: false
         }
 
             sendTask(toAPI)
@@ -42,6 +43,11 @@ export const createTaskBox = () => {
 const tasks = getTasks()
 return`
 ${tasks.map(task => {
+    if(task.complete){
+        return 
+    }
+
+
     return `<div class="taskContainer" id="${task.id}">
                 <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
                 <div class="task-date-container"><p class="task-date">${task.date}</p></div>
@@ -58,6 +64,6 @@ ${tasks.map(task => {
 dashboard.addEventListener("click", click => {
     if (click.target.id.startsWith("completeTask--")) {
         const [,taskId] = click.target.id.split("--")
-        deleteTask(parseInt(taskId))
+        markTaskComplete(parseInt(taskId))
     }
 })

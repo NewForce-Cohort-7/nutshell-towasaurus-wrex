@@ -9,7 +9,8 @@ const applicationState = {
     events: [],
     tasks: [],
     messages: [],
-    photos: []
+    photos: [],
+    
 };
 
 export const fetchUsers = () => {
