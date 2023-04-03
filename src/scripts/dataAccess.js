@@ -119,6 +119,53 @@ export const saveImage = (newImageObject) => {
         })
 }
 
+export const thumbsUpMessage = (id) => {
+
+    //grab current thumbsUp count from active state and add one to it
+    let newThumbsUpCount = 0
+    for (const message of applicationState.messages) {
+        if (message.id === id) {
+            newThumbsUpCount = message.thumbsUp + 1
+        }
+    }
+
+    //update API with new value with PATCH fetch method
+    fetch(`${API}/messages/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          thumbsUp: newThumbsUpCount,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then(() => dashboard.dispatchEvent(new CustomEvent("stateChanged")));
+}
+
+export const thumbsDownMessage = (id) => {
+
+    //grab current thumbsUp count from active state and add one to it
+    let newThumbsDownCount = 0
+    for (const message of applicationState.messages) {
+        if (message.id === id) {
+            newThumbsDownCount = message.thumbsDown + 1
+        }
+    }
+
+    //update API with new value with PATCH fetch method
+    fetch(`${API}/messages/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          thumbsDown: newThumbsDownCount,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then(() => dashboard.dispatchEvent(new CustomEvent("stateChanged")));
+}
 export const saveEvent = (event) => {
     const fetchOptions = {
         method: "POST",
