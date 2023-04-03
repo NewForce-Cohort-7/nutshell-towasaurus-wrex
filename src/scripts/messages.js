@@ -1,5 +1,5 @@
 // Responsibility: Generate the HTML for chat and new message section
-import { getMessages, saveMessage } from "./dataAccess.js"
+import { deleteMessage, getMessages, saveMessage } from "./dataAccess.js"
 
 export const createMessageModule = () => {
 const messages = getMessages()
@@ -7,9 +7,10 @@ const messages = getMessages()
 return `<h3>Chat</h3>
         <div id="message-list">
             ${messages.map(message => {
-                return `<div class="message-container" id="${message.id}">
+                return `<div class="message-container">
                             <div class="message-name">${message.userName}:</div>
                             <div class="message-text-container"><p class="message-text">${message.message}</p></div> 
+                            <button class="image-delete-button" id="delete-message--${message.id}" value="${message.id}">Delete</button>
                         </div>`}).join("")
             }
         </div>
@@ -23,7 +24,16 @@ return `<h3>Chat</h3>
         </div>`
 }
 
-// lets listen for the click of the send message button
+
+// listen for the click of the message delete button and delete the image when clicked
+document.addEventListener("click", event => {
+    if (event.target.id.startsWith("delete-message--")) {
+        deleteMessage(parseInt(event.target.value))
+    }
+})
+
+
+// listen for the click of the send message button and save it when clicked
 document.querySelector("#dashboard").addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "new-message-save-button") {
 
