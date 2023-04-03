@@ -1,7 +1,5 @@
-.event-container{
-    border: thin solid #462F77;
-    padding: 10px;
-    height: 200px;
-    overflow-y: scroll;
-    width: 250px;
+.event-container:first-child{
+    background: lightgrey;
+    
+
 }

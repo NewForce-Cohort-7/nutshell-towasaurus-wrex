@@ -17,7 +17,7 @@ dashboard.addEventListener("click", clickEvent => {
 
 export const listOfEvents = (event) => {
     const events = getEvents()
-    return `
+    return `<div class="event-list">
     ${events.map(event => {
         return `<div class="event-container" id="${event.id}">
         <div class="event-name">${event.name}</div>
@@ -28,6 +28,7 @@ export const listOfEvents = (event) => {
     }).join("")
     // Create button to create event
 }
+        </div>
 <div id="new-event-form"></div>
 <button class="button" id="createNewEvent">Create New Event</button>
 `
