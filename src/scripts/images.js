@@ -10,7 +10,7 @@ return `<section id="images-module">
                 ${images.map(image => {
                     return `<div class="image-container">
                                 <img class="image" id="${image.id}" src="${image.url}"/>
-                                <button class="image-delete-button" id="delete-image--${image.id}" value="${image.id}">Delete</button>
+                                <button class="delete-button" id="delete-image--${image.id}" value="${image.id}">Delete</button>
                                 <div class="image-text-container">${image.caption}</div> 
                             </div>`}).join("")
                 }
@@ -40,7 +40,7 @@ const createNewImageForm = () => {
             <label class="label" for="new-image-url">URL</label>
             <input type="text" id="new-image-url" class="input"></input>
             <label class="label" for="new-image-caption">Caption</label>
-            <input type="text" id="new-image-caption" class="input"></input>
+            <input type="text" maxlength="30" id="new-image-caption" class="input"></input>
             <button class="button" id="save-image-button">Save</button>`
 }
 
