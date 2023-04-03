@@ -54,3 +54,10 @@ ${tasks.map(task => {
 </div>
 `
 }
+
+dashboard.addEventListener("click", click => {
+    if (click.target.id.startsWith("completeTask--")) {
+        const [,taskId] = click.target.id.split("--")
+        deleteTask(parseInt(taskId))
+    }
+})
