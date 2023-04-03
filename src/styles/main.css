@@ -1,0 +1,16 @@
+@import "./images.css";
+@import "./messages.css";
+
+::-webkit-scrollbar {width: 13px}
+::-webkit-scrollbar-track {background: white}
+::-webkit-scrollbar-thumb {background: #462F77}
+
+.delete-button{
+    margin: 10px;
+    background-color: #462F77;
+    color: white;
+    padding: 5px 10px;
+    border: solid thin #462F77;
+    border-radius: 15px;
+    cursor: pointer; 
+}
