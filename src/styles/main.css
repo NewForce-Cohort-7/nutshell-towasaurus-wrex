@@ -1,3 +1,5 @@
+@import "./taskStyle.css";
+
 .message-name{
     font-weight: bold;
     padding: 5px;
@@ -38,3 +40,4 @@
     overflow-y: scroll;
     width: 250px;
 }
+

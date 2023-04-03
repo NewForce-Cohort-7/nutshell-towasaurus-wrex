@@ -41,3 +41,4 @@ document.querySelector("#dashboard").addEventListener("click", clickEvent => {
         saveMessage(newMessageData)
     }
 })
+
