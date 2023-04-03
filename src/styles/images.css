@@ -1,0 +1,37 @@
+#images-module{
+    border: thin solid blue;
+    padding: 20px;
+    width: 620px;
+}
+
+#images-grid{
+    flex-wrap: wrap;
+}
+
+.image{
+    width: 100px;
+}
+
+#images-grid, .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.image-container{
+    flex-direction: column;
+    height: 150px;
+    width: 150px;
+    background-color: white;
+    border: thin solid #462F77;
+}
+
+#new-image-form{
+    padding: 10px;
+    width:600px;
+}
+
+#new-image-save-button{
+    margin-bottom: 20px;
+}
