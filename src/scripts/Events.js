@@ -15,10 +15,15 @@ dashboard.addEventListener("click", clickEvent => {
     }
 })
 
-export const listOfEvents = (event) => {
-    const events = getEvents()
-    return `<div class="event-list">
-    ${events.map(event => {
+const getMonthName = (monthNum) => {
+    const date = new Date()
+    date.setMonth(monthNum - 1)
+    return date.toLocaleString('en-US', { month: 'long' })
+}
+
+const createEventList = (events) => {
+    
+    return `${events.map(event => {
         return `<div class="event-container" id="${event.id}">
         <div class="event-name">${event.name}</div>
         <div class="event-date">${event.date}</div>
@@ -26,13 +31,42 @@ export const listOfEvents = (event) => {
         <button class="even-delete-button" id="delete-event--${event.id}" value="${event.id}">Delete</button>
         </div>`
     }).join("")
-    // Create button to create event
-}
-        </div>
-<div id="new-event-form"></div>
-<button class="button" id="createNewEvent">Create New Event</button>
-`
+}`}
+
+const eventsByMonth = () => {
+    const events = getEvents()
+    
+    let HTMLstring = ""
+    for(let i = 1; i < 13; i++){
+        const monthlyEvents = []
+        let eventCount = 0
+        events.forEach(event => {
+            const [,eventMonth] = event.date.split("-")
+            if(parseInt(eventMonth) === i){
+                monthlyEvents.push(event)
+                eventCount++
+            }
+        })
+        // console.log(monthlyEvents)
+        if(eventCount !== 0){
+        HTMLstring += `<h3>${getMonthName(i)} (${eventCount})</h3>
+                    ${createEventList(monthlyEvents)}
+        
+        `
+        }
     }
+    return HTMLstring
+}
+
+
+export const listOfEvents = () => {
+    return `<div class="event-list">
+    ${eventsByMonth()}
+    </div>
+    <div id="new-event-form"></div>
+    <button class="button" id="createNewEvent">Create New Event</button>
+    `
+}
 
     
     // Create form to add event

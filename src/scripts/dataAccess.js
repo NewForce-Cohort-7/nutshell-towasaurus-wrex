@@ -77,8 +77,8 @@ export const getEvents = () => {
     let jumbledEvents = applicationState.events.map(obj => ({ ...obj }))
     let sortedEvents = jumbledEvents.sort((a , b) =>
     new Date(a.date) - new Date(b.date)
-    )
-    // console.log(sortedEvents)
+  )
+//   console.log(sortedEvents)
     return sortedEvents
 }
 
