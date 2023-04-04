@@ -30,7 +30,30 @@ export const fetchArticles = () => {
 }
 
 export const getArticles = () => {
-    return applicationState.articles.map(obj => ({ ...obj }))
+    return applicationState.articles.map(articles => ({ ...articles }))
+        .sort((articleA, articleB) => new Date(articleB.date) - new Date(articleA.date));
+}
+
+
+export const deleteArticles = (id) => {
+    return fetch(`${API}/articles/${id}`, { method: "DELETE" })
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const saveArticles = (article) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(article)
+    }
+
+    return fetch(`${API}/articles`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
 }
 
 export const fetchEvents = () => {
@@ -40,7 +63,12 @@ export const fetchEvents = () => {
 }
 
 export const getEvents = () => {
-    return applicationState.events.map(obj => ({ ...obj }))
+    let jumbledEvents = applicationState.events.map(obj => ({ ...obj }))
+    let sortedEvents = jumbledEvents.sort((a , b) =>
+    new Date(a.date) - new Date(b.date)
+    )
+    // console.log(sortedEvents)
+    return sortedEvents
 }
 
 export const fetchTasks = () => {
@@ -206,5 +234,23 @@ export const thumbsDownMessage = (id) => {
         .then((response) => response.json())
         .then(() => dashboard.dispatchEvent(new CustomEvent("stateChanged")));
 }
+export const saveEvent = (event) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(event)
+    }
 
+    return fetch(`${API}/events`, fetchOptions)
+            .then(response => response.json)
+            .then(() => {
+                dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+            })
+}
 
+export const deleteEvent = (id) => {
+    return fetch(`${API}/events/${id}`, { method: "DELETE" })
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
