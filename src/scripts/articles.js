@@ -27,7 +27,7 @@ const articleList = () => {
             </div>
         `
     }).join("")
-};
+}
 
 
 // Toggle visibility of the article form
@@ -59,10 +59,10 @@ const initEventListeners = () => {
         } else if (event.target.id === "saveArticle") {
             saveArticleHandler(event)
         } else if (event.target.classList.contains("deleteArticle")) {
-            const articleId = parseInt(event.target.dataset.id);
+            const articleId = parseInt(event.target.dataset.id)
             deleteArticles(articleId)
         } else if (event.target.classList.contains("tag")) {
-            const tag = event.target.dataset.tag;
+            const tag = event.target.dataset.tag
             filterArticlesByTag(tag)
         }
     })
@@ -95,7 +95,7 @@ const filterArticlesByTag = (tag) => {
     // Set the selectedTag variable to the provided tag
     selectedTag = tag
     // Update the HMTL of the #articles container with the filtered articles
-    document.querySelector("#articles").innerHTML = Articles();
+    document.querySelector("#articles").innerHTML = Articles()
     // Re-attach event listeners after updating the inner HTML
     initEventListeners()
 }
