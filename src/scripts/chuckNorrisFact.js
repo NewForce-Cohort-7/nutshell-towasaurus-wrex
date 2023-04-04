@@ -23,7 +23,7 @@ const render = () => {
             <p>${chuckFact}</p>
             <button id="generateFact">Generate Fact</button>
         </div>
-    `;
+    `
 
     // Update the innerHTML
     document.querySelector("#chuckNorrisFact").innerHTML = html

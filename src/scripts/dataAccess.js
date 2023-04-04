@@ -42,7 +42,7 @@ export const fetchArticles = () => {
 
 export const getArticles = () => {
     return applicationState.articles.map(articles => ({ ...articles }))
-        .sort((articleA, articleB) => new Date(articleB.date) - new Date(articleA.date));
+        .sort((articleA, articleB) => new Date(articleB.date) - new Date(articleA.date))
 }
 
 
