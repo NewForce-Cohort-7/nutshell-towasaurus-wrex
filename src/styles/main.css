@@ -10,10 +10,9 @@
 
 .delete-button{
     margin: 10px;
-    background-color: #462F77;
-    color: white;
+    background-color: lightgray;
     padding: 5px 10px;
-    border: solid thin #462F77;
+    border: solid thin black;
     border-radius: 15px;
     cursor: pointer; 
 }

@@ -9,7 +9,7 @@
 }
 
 .image{
-    width: 100px;
+    width: 200px;
 }
 
 #images-grid, .image-container {
@@ -21,8 +21,8 @@
 
 .image-container{
     flex-direction: column;
-    height: 150px;
-    width: 150px;
+    height: 300px;
+    width: 300px;
     background-color: white;
     border: thin solid #462F77;
 }
@@ -34,4 +34,20 @@
 
 #new-image-save-button{
     margin-bottom: 20px;
+}
+
+.image-text-container{
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.image-tag{
+    margin: 5px;
+    background-color: #462F77;
+    color: white;
+    padding: 5px 10px;
+    border: solid thin #462F77;
+    border-radius: 15px;
+    cursor: pointer; 
 }
