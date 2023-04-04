@@ -57,10 +57,11 @@ tasks.forEach(task =>{
 // if (total === 0){
 //     percentage = 0
 // }
-const percentage = (total > 0) ? (completedCount/total) * 100 : 0
+const percentage = (total > 0) ? Math.round((completedCount / total) * 100) + '%' : '0%';
+
 
 return`
-<h3 id="percentComplete">Tasks Completed: ${percentage}%</h3>
+<h3 id="percentComplete">Tasks Completed: ${percentage}</h3>
 <h3>Incomplete Tasks</h3>
 
 ${tasks.map(task => {

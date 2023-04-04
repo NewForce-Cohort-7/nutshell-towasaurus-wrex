@@ -10,16 +10,15 @@ const articleList = () => {
     // Filter articles based on the selected tag (if any)
     const filteredArticles = selectedTag ? articles.filter(article => article.tags && article.tags.includes(selectedTag)) : articles
 
-    
     // Generate HTML for each filtered article
     return filteredArticles.map(article => {
         // Generate tag buttons for each tag in the article
-        const tagButtons = (article.tags && article.tags.length > 0) 
+        const tagButtons = (article.tags && article.tags.length > 0 && article.tags[0] !== "") 
             ? article.tags.map(tag => `<button class="tag" data-tag="${tag}">${tag}</button>`).join("")
             : ""
         return `
             <div class="article">
-                <h3>${article.title} ${tagButtons}</h3>
+                <h3>${article.title}${tagButtons ? ` ${tagButtons}` : ""}</h3>
                 <p class="articleDate">${article.date}</p>
                 <p>${article.synopsis}</p>
                 <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
@@ -28,6 +27,8 @@ const articleList = () => {
         `
     }).join("")
 }
+
+
 
 
 // Toggle visibility of the article form
