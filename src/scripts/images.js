@@ -64,7 +64,7 @@ document.addEventListener("click", clickEvent => {
 
 // listen for the click of a tag button and display only the images with the same tag
 document.addEventListener("click", event => {
-    if (event.target.classList.contains("tag")) {
+    if (event.target.classList.contains("image-tag")) {
         selectedTag = event.target.dataset.tag;
     }
     // Update the HMTL of the images-grid container with the filtered articles
