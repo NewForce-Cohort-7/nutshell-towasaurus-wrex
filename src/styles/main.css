@@ -17,3 +17,12 @@
     border-radius: 15px;
     cursor: pointer; 
 }
+
+/*****************
+ ARTICLES CSS 
+ *****************/
+/* this toggles the form display */
+.hidden {
+    display: none;
+}
+

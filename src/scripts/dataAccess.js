@@ -30,7 +30,30 @@ export const fetchArticles = () => {
 }
 
 export const getArticles = () => {
-    return applicationState.articles.map(obj => ({ ...obj }))
+    return applicationState.articles.map(articles => ({ ...articles }))
+        .sort((articleA, articleB) => new Date(articleB.date) - new Date(articleA.date));
+}
+
+
+export const deleteArticles = (id) => {
+    return fetch(`${API}/articles/${id}`, { method: "DELETE" })
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const saveArticles = (article) => {
+    const fetchOptions = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(article)
+    }
+
+    return fetch(`${API}/articles`, fetchOptions)
+        .then(response => response.json())
+        .then(() => {
+            dashboard.dispatchEvent(new CustomEvent("stateChanged"))
+        })
 }
 
 export const fetchEvents = () => {
