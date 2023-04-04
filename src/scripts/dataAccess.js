@@ -4,14 +4,25 @@ const API = "http://localhost:8088"
 const dashboard = document.querySelector("#dashboard")
 
 const applicationState = {
-    users: [],
     articles: [],
     events: [],
-    tasks: [],
     messages: [],
     photos: [],
+    tasks: [],
+    chuckFact: ""
+}
 
-};
+// CHUCK NORRIS FACTS
+// Retrieves the current Chuck Norris fact from the application state
+export const getChuckFact = () => {
+    return applicationState.chuckFact
+  }
+
+// Sets a new Chuck Norris fact in the application state
+  export const setChuckFact = (fact) => {
+    applicationState.chuckFact = fact
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+  }
 
 export const fetchUsers = () => {
     return fetch(`${API}/users`)
@@ -31,7 +42,7 @@ export const fetchArticles = () => {
 
 export const getArticles = () => {
     return applicationState.articles.map(articles => ({ ...articles }))
-        .sort((articleA, articleB) => new Date(articleB.date) - new Date(articleA.date));
+        .sort((articleA, articleB) => new Date(articleB.date) - new Date(articleA.date))
 }
 
 
