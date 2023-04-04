@@ -19,9 +19,9 @@ const render = () => {
     // Generate the HTML
     const html = `
         <div id="chuckNorrisFact">
-            <h2>Chuck Norris Fact</h2>
+            <h2>Random Chuck Norris Fact</h2>
             <p>${chuckFact}</p>
-            <button id="generateFact">Generate Fact</button>
+            <button id="generateFact">Generate New Fact</button>
         </div>
     `
 
@@ -36,9 +36,9 @@ export const createChuckHTML = () => {
 
     const html = `
         <div id="chuckNorrisFact">
-            <h2>Chuck Norris Fact</h2>
+            <h2>Chuck Norris Fact of the Day</h2>
             <p>${chuckFact}</p>
-            <button id="generateFact">Generate Fact</button>
+            <button id="generateFact">Generate New Fact</button>
         </div>
     `
 
