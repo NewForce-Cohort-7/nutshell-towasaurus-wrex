@@ -67,6 +67,7 @@ export const getEvents = () => {
     let sortedEvents = jumbledEvents.sort((a , b) =>
     new Date(a.date) - new Date(b.date)
   )
+//   console.log(sortedEvents)
     return sortedEvents
 }
 
