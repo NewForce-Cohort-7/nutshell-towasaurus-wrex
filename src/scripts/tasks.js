@@ -39,10 +39,28 @@ dashboard.addEventListener("click", event => {
     }
 })
 
+
+
 export const createTaskBox = () => {
 const tasks = getTasks()
-return`
+// let percentage = 0
+let total = 0
+total = tasks.length
+let completedCount = 0
+tasks.forEach(task =>{
+    if (task.complete){
+    completedCount++
+        }
+    }
+)
+// percentage = (completedCount / total) * 100
+// if (total === 0){
+//     percentage = 0
+// }
+const percentage = (total > 0) ? (completedCount/total) * 100 : 0
 
+return`
+<h3 id="percentComplete">Tasks Completed: ${percentage}%</h3>
 <h3>Incomplete Tasks</h3>
 
 ${tasks.map(task => {
@@ -63,7 +81,8 @@ ${tasks.map(task => {
         return `<div class="taskContainer" id="${task.id}">
             <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
             <div class="task-date-container"><p class="task-date">${task.date}</p></div>
-            </div>`
+            </div>
+            `
     }
 }).join("")
 }
@@ -76,9 +95,13 @@ ${tasks.map(task => {
 `
 }
 
+
+
 dashboard.addEventListener("click", click => {
     if (click.target.id.startsWith("completeTask--")) {
         const [,taskId] = click.target.id.split("--")
         markTaskComplete(parseInt(taskId))
     }
 })
+
+
