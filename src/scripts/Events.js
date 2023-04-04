@@ -30,7 +30,12 @@ const monthLoop = () => {
 
 console.log(monthLoop())
 
+const eventsByMonth = () => {
+    let html = ""
 
+
+    
+}
 
 export const listOfEvents = () => {
     const events = getEvents()
