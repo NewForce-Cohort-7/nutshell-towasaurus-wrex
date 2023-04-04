@@ -90,7 +90,6 @@ export const Articles = () => {
     `
 }
 
-
 // This function filters articles by the provided tag, updates the articles container with the filtered articles, and re-attaches event listeners
 const filterArticlesByTag = (tag) => {
     // Set the selectedTag variable to the provided tag
