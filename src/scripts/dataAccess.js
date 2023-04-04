@@ -12,10 +12,13 @@ const applicationState = {
     chuckFact: ""
 }
 
+// CHUCK NORRIS FACTS
+// Retrieves the current Chuck Norris fact from the application state
 export const getChuckFact = () => {
     return applicationState.chuckFact
   }
-  
+
+// Sets a new Chuck Norris fact in the application state
   export const setChuckFact = (fact) => {
     applicationState.chuckFact = fact
     document.dispatchEvent(new CustomEvent("stateChanged"))
