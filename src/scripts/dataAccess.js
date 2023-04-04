@@ -4,14 +4,22 @@ const API = "http://localhost:8088"
 const dashboard = document.querySelector("#dashboard")
 
 const applicationState = {
-    users: [],
     articles: [],
     events: [],
-    tasks: [],
     messages: [],
     photos: [],
+    tasks: [],
+    chuckFact: ""
+}
 
-};
+export const getChuckFact = () => {
+    return applicationState.chuckFact
+  }
+  
+  export const setChuckFact = (fact) => {
+    applicationState.chuckFact = fact
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+  }
 
 export const fetchUsers = () => {
     return fetch(`${API}/users`)
