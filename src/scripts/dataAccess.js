@@ -301,3 +301,25 @@ export const deleteEvent = (id) => {
             dashboard.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
+
+// BREWERIES 
+export const getBreweries = () => {
+    return applicationState.breweries.map(brewery => ({...brewery}))
+}
+
+export const fetchBreweriesByState = (breweryState) => {
+  return fetch(`${BreweriesAPI}?by_state=${breweryState}`)
+  .then(response => response.json())
+  .then((parsedResponse) => { applicationState.breweries = parsedResponse})
+}
+
+export const fetchBreweriesByCity = (breweryCity) => {
+    return fetch(`${BreweriesAPI}?by_city=${breweryCity}`)
+    .then(response => response.json())
+    .then((parsedResponse) => {applicationState.breweries = parsedResponse})
+}
+
+export const setBreweries = (brewery) => {
+    applicationState.breweries = brewery
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+  }
