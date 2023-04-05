@@ -21,9 +21,9 @@ const articleList = () => {
 
             return `
                 <div class="article">
-                    <h3>${article.title}${tagButtons ? ` ${tagButtons}` : ""}</h3>
+                    <h3 class="articleTitle">${article.title}${tagButtons ? ` ${tagButtons}` : ""}</h3>
                     <p class="articleDate">${article.date}</p>
-                    <p>${article.synopsis}</p>
+                    <p class="articleSynopsis">${article.synopsis}</p>
                     <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
                     <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
                 </div>
@@ -120,19 +120,21 @@ const showAllArticles = () => {
 export const Articles = () => {
     return `
         <div id="articles">
-            <h2>Articles</h2>
+            <h2 class="articles-heading">Articles</h2>
             ${articleList()}
-            <button id="addNewArticle">+ Add new article</button>
-            <button id="showAllArticles">Show All</button>
+            <div class="add-show-container">
+                <button id="addNewArticle">+ Add new article</button> | 
+                <button id="showAllArticles">View all articles</button>
+            </div>
             <form id="articleForm" class="hidden">
-                <label for="articleTitle">Title</label>
-                <input type="text" id="articleTitle" required>
-                <label for="articleUrl">URL</label>
-                <input type="text" id="articleUrl" required>
+                <label for="articleTitle">Article Title</label>
+                <input type="text" id="articleTitle" class="article-field" required>
+                <label for="articleUrl">Article URL</label>
+                <input type="text" id="articleUrl" class="article-field" required>
                 <label for="articleSynopsis">Synopsis</label>
-                <input type="text" id="articleSynopsis" required>
+                <textarea type="text" id="articleSynopsis" class="article-field" required></textarea>
                 <label for="articleTags">Tags</label>
-                <input type="text" id="articleTags" placeholder="tag1, tag2, tag3">
+                <input type="text" id="articleTags" class="article-field" placeholder="tag1, tag2, tag3">
                 <button id="saveArticle">Add Article</button>
             </form>
         </div>
