@@ -5,6 +5,7 @@ import { createTaskBox } from "./tasks.js"
 import { Articles } from "./articles.js"
 import { createChuckHTML } from "./chuckNorrisFact.js"
 import { createDadJokes } from "./dadJokes.js"
+import { BreweriesForm, breweryList } from "./Breweries.js"
 
 export const createHTML = () => {
   // Render all your UI components here
@@ -16,5 +17,7 @@ export const createHTML = () => {
     ${Articles()}
     ${createChuckHTML()}
     ${createDadJokes()}
+    ${BreweriesForm()}
+    ${breweryList()}
   `
 }

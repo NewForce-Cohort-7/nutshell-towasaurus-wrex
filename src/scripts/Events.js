@@ -60,7 +60,7 @@ const eventsByMonth = () => {
 
 
 export const listOfEvents = () => {
-    return `<div class="event-list">
+    return `<div class="event-list"><h2>Events</h2>
     ${eventsByMonth()}
     </div>
     <div id="new-event-form"></div>

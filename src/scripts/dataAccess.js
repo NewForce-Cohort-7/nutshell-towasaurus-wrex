@@ -1,5 +1,5 @@
 // Responsbility: Manage application state and provide functions to change permanent state with fetch() calls to the API.
-
+const BreweriesAPI = "https://api.openbrewerydb.org/v1/breweries"
 const API = "http://localhost:8088"
 const dashboard = document.querySelector("#dashboard")
 
@@ -10,7 +10,8 @@ const applicationState = {
     photos: [],
     tasks: [],
     chuckFact: "",
-    dadJoke: {}
+    dadJoke: {},
+    breweries: []
 }
 
 // CHUCK NORRIS FACTS
@@ -300,4 +301,3 @@ export const deleteEvent = (id) => {
             dashboard.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
-

@@ -1,5 +1,4 @@
-
-import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, setChuckFact, fetchRandomJoke } from "./dataAccess.js"
+import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, getChuckFact, setChuckFact, fetchRandomJoke } from "./dataAccess.js"
 import { createHTML } from "./createHTML.js"
 import { fetchRandomFact } from "./apiAccess.js"
 import { initEventListeners } from "./articles.js"
