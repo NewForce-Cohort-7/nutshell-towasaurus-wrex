@@ -1,12 +1,9 @@
 
-import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, setChuckFact } from "./dataAccess.js"
+import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, getChuckFact, setChuckFact, fetchRandomJoke } from "./dataAccess.js"
 import { createHTML } from "./createHTML.js"
 import { fetchRandomFact } from "./apiAccess.js"
-import { initEventListeners } from "./articles.js"
 
 const dashboard = document.querySelector("#dashboard")
-
-
 
 const render = () => {
     fetchArticles()
@@ -14,6 +11,7 @@ const render = () => {
         .then(() => fetchTasks())
         .then(() => fetchPhotos())
         .then(() => fetchMessages())
+        .then(() => fetchRandomJoke())
         .then(() => fetchRandomFact())
         .then(fact => {
             setChuckFact(fact)
