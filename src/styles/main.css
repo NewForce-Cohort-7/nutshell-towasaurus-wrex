@@ -36,6 +36,7 @@ body {
 #articles {
     background: #fff;
     width: 75%;
+    box-shadow: 0 4px 2px -2px gray;
 }
 
 /* title of article module */
