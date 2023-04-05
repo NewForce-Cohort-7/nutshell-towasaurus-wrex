@@ -1,6 +1,8 @@
-import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, getChuckFact, setChuckFact, fetchRandomJoke, getTasks } from "./dataAccess.js"
+
+import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, setChuckFact, fetchRandomJoke, getTasks } from "./dataAccess.js"
 import { createHTML } from "./createHTML.js"
-import { fetchRandomFact} from "./apiAccess.js"
+import { fetchRandomFact } from "./apiAccess.js"
+import { initEventListeners } from "./articles.js"
 
 const dashboard = document.querySelector("#dashboard")
 
@@ -10,8 +12,15 @@ const render = () => {
         .then(() => fetchTasks())
         .then(() => fetchPhotos())
         .then(() => fetchMessages())
-        .then(() => fetchRandomFact())
         .then(() => fetchRandomJoke())
+        .then(() => {
+            dashboard.innerHTML = createHTML()
+            // Initialize event listeners for the Articles component
+            initEventListeners()
+            // Fetch a random Chuck Norris fact
+            return fetchRandomFact()
+        })
+        // Set the fact in the application state
         .then(fact => {
             setChuckFact(fact)
         })
