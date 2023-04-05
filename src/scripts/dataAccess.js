@@ -271,8 +271,20 @@ export const getBreweries = () => {
     return applicationState.breweries.map(brewery => ({...brewery}))
 }
 
-export const fetchBreweries = () => {
-  return fetch(`${BreweriesAPI}/breweries`)
+export const fetchBreweriesByState = () => {
+  return fetch(`${BreweriesAPI}?by_state=`)
   .then(response => response.json())
-  .then((parsedResponse) => {applicationState.breweries = parsedResponse })
+  .then(parsedResponse => {return parsedResponse.value})
 }
+
+export const fetchBreweriesByCity = () => {
+    return fetch(`${BreweriesAPI}?by_city=`)
+    .then(response => response.json())
+    .then(parsedResponse => {return parsedResponse.value})
+  }
+
+export const setBreweries = (brewery) => {
+    applicationState.breweries = brewery
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+  }
+
