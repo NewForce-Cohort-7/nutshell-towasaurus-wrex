@@ -16,5 +16,8 @@ export const createHTML = () => {
     ${createTaskBox()}
     ${Articles()}
     ${createChuckHTML()}
+    ${createDadJokes()}
+    ${BreweriesForm()}
+    ${breweryList()}
   `
 }
