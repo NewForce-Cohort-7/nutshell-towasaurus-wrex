@@ -4,7 +4,11 @@ import { fetchRandomJoke, getDadJoke, setDadJoke } from "./dataAccess.js"
 export const createDadJokes = () => {
     const dadJoke = getDadJoke()
 
-    if(dadJoke.message){return `<div id="dad-joke">Max Dad Jokes Exceeded (50)</div>`}
+    if(dadJoke.message){return `<div id="dad-joke">
+                                    <h2>Random Dad Joke</h2>
+                                    <p>Max Daily Dad Jokes Exceeded (50)</p>
+                                    <button id="new-joke">Give me another joke</button>
+                                </div>`}
 
     else{
         return `<div id="dad-joke">
