@@ -36,15 +36,11 @@ new Chart(ctx, {
       datasets: [{
         label: 'Tasks',
         data: [taskComplete, taskIncomplete],
-        borderWidth: 1
+        
       }]
     },
     options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
+
     }
   });
         })

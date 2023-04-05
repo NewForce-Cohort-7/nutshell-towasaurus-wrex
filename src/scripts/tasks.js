@@ -52,7 +52,7 @@ completedCount = tasks.filter(task => {
 const percentage = (total > 0) ? (completedCount/total) * 100 : 0
 
 return`
-<div>
+<div id="chartContainer">
 <canvas id="myChart"></canvas>
 </div>
 <h3 id="percentComplete">Tasks Completed: ${percentage}%</h3>
