@@ -4,6 +4,7 @@ import { createMessageModule } from "./messages.js"
 import { createTaskBox } from "./tasks.js"
 import { Articles } from "./articles.js"
 import { createChuckHTML } from "./chuckNorrisFact.js"
+import { createDadJokes } from "./dadJokes.js"
 import { BreweriesForm, breweryList } from "./Breweries.js"
 
 export const createHTML = () => {
@@ -15,7 +16,5 @@ export const createHTML = () => {
     ${createTaskBox()}
     ${Articles()}
     ${createChuckHTML()}
-    ${breweryList()}
-    ${BreweriesForm()}
   `
 }
