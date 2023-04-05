@@ -1,3 +1,4 @@
+// Responsibility: Shows a random Chuck Norris fact upon page load. User can generate a new Chuck Norris fact at random.
 import { getChuckFact, setChuckFact } from "./dataAccess.js"
 import { fetchRandomFact } from "./apiAccess.js"
 

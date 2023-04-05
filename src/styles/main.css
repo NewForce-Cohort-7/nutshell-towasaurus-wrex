@@ -1,8 +1,15 @@
 @import "./events.css";
 @import "./taskStyle.css";
-
 @import "./images.css";
 @import "./messages.css";
+
+* {
+    font-family: Lato;
+}
+
+body {
+    background-color: #D9D9D9;
+}
 
 ::-webkit-scrollbar {width: 13px}
 ::-webkit-scrollbar-track {background: white}
@@ -25,3 +32,94 @@
     display: none;
 }
 
+/* articles container */
+#articles {
+    background: #fff;
+    width: 75%;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+/* title of article module */
+.articles-heading {
+    border-bottom: 1px solid #D9D9D9;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 20px;
+    margin-bottom: 0;
+}
+
+/* individual articles */
+.article {
+    padding: 15px 20px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.articleTitle {
+    margin-bottom: 0;
+}
+
+/* article tags */
+.tag {
+    margin-left: 10px;
+    background: #462F77;
+    border: none;
+    color: white;
+}
+
+/* article date */
+.articleDate {
+    margin: 0;
+    color: gray;
+}
+
+/* article synopsis */
+.articleSynopsis {
+    margin-top: 0;
+}
+
+/* open article, delete article, and save article buttons */
+.openArticle, .deleteArticle, #saveArticle {
+    background: #462f77;
+    color: white;
+    padding: 10px;
+    border: 0;
+}
+
+/* save article button positioning */
+#saveArticle {
+    margin-top: 10px;
+}
+
+/* open article button link formatting */
+button.openArticle > a {
+    color: white;
+    text-decoration: none;
+}
+
+/* add new article, show all article links/buttons */
+#addNewArticle, #showAllArticles {
+    background: white;
+    color: #462F77;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* this is the container for the new article, show all links/buttons */
+.add-show-container {
+    padding: 15px;
+}
+
+/* new article form input */
+#articleForm {
+    padding: 20px;
+    border-top: 1px solid #D9D9D9;
+}
+
+/* positions the article form fields */
+.article-field {
+    display: block;
+    margin-bottom: 10px;
+    width: 50%;
+}
