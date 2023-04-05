@@ -302,6 +302,7 @@ export const deleteEvent = (id) => {
         })
 }
 
+// BREWERIES 
 export const getBreweries = () => {
     return applicationState.breweries.map(brewery => ({...brewery}))
 }
@@ -322,4 +323,3 @@ export const setBreweries = (brewery) => {
     applicationState.breweries = brewery
     document.dispatchEvent(new CustomEvent("stateChanged"))
   }
-

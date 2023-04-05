@@ -10,25 +10,26 @@ const articleList = () => {
     // Filter articles based on the selected tag (if any)
     const filteredArticles = selectedTag ? articles.filter(article => article.tags && article.tags.includes(selectedTag)) : articles
 
-    
     // Generate HTML for each filtered article
     return filteredArticles.map(article => {
-        // Generate tag buttons for each tag in the article
-        const tagButtons = (article.tags && article.tags.length > 0) 
+        // Check if article.tags is defined and contains at least one non-empty string
+            const tagButtons = (article.tags && article.tags.length > 0 && article.tags[0] !== "") 
+        // If the condition is true, create a string of HTML button elements using the tags in article.tags
             ? article.tags.map(tag => `<button class="tag" data-tag="${tag}">${tag}</button>`).join("")
+        // If the condition is false, assign an empty string to tagButtons
             : ""
-        return `
-            <div class="article">
-                <h3>${article.title} ${tagButtons}</h3>
-                <p class="articleDate">${article.date}</p>
-                <p>${article.synopsis}</p>
-                <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
-                <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
-            </div>
-        `
-    }).join("")
-}
 
+            return `
+                <div class="article">
+                    <h3>${article.title}${tagButtons ? ` ${tagButtons}` : ""}</h3>
+                    <p class="articleDate">${article.date}</p>
+                    <p>${article.synopsis}</p>
+                    <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
+                    <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
+                </div>
+            `
+        }).join("")
+    }
 
 // Toggle visibility of the article form
 const toggleArticleForm = () => {
@@ -46,35 +47,83 @@ const saveArticleHandler = (event) => {
     const date = new Date().toISOString().split('T')[0]
     const tags = document.querySelector("#articleTags").value.split(',').map(tag => tag.trim())
 
-
     const newArticle = { title, url, synopsis, date, tags }
     saveArticles(newArticle)
 }
 
-// Initialize event listeners
-const initEventListeners = () => {
+// Add event listeners for deleting articles and filtering articles by tag
+const attachEventListeners = () => {
+    // Attach event listener to all delete buttons
+    const deleteButtons = document.querySelectorAll(".deleteArticle")
+    deleteButtons.forEach(button => button.addEventListener("click", event => {
+        // Get the ID of the article to delete
+        const articleId = parseInt(event.target.dataset.id)
+        // Call the deleteArticles function with the article ID as an argument
+        deleteArticles(articleId)
+    }))
+
+    // Attach event listener to all tag buttons
+    const tagButtons = document.querySelectorAll(".tag")
+    tagButtons.forEach(button => button.addEventListener("click", event => {
+        // Get the tag from the clicked button
+        const tag = event.target.dataset.tag
+        // Call the filterArticlesByTag function with the tag as an argument
+        filterArticlesByTag(tag)
+    }))
+}
+
+export const initEventListeners = () => {
     document.addEventListener("click", event => {
-        if (event.target.id === "addNewArticle") {
-            toggleArticleForm()
-        } else if (event.target.id === "saveArticle") {
-            saveArticleHandler(event)
-        } else if (event.target.classList.contains("deleteArticle")) {
+        // If the "Show All" button is clicked, show all articles
+        if (event.target.id === "showAllArticles") {
+            showAllArticles()
+        } 
+        // If a delete button is clicked, delete the corresponding article
+        else if (event.target.classList.contains("deleteArticle")) {
             const articleId = parseInt(event.target.dataset.id)
             deleteArticles(articleId)
-        } else if (event.target.classList.contains("tag")) {
+        } 
+        // If a tag button is clicked, filter articles by the corresponding tag
+        else if (event.target.classList.contains("tag")) {
             const tag = event.target.dataset.tag
             filterArticlesByTag(tag)
         }
     })
+
+    // Add event listener to the "Add new article" button to show/hide the article form
+    const addNewArticleButton = document.querySelector("#addNewArticle")
+    if (addNewArticleButton) {
+        addNewArticleButton.removeEventListener("click", toggleArticleForm)
+        addNewArticleButton.addEventListener("click", toggleArticleForm)
+    }
+
+    // Add event listener to the "Add Article" button to save the new article
+    const saveArticleButton = document.querySelector("#saveArticle")
+    if (saveArticleButton) {
+        saveArticleButton.removeEventListener("click", saveArticleHandler)
+        saveArticleButton.addEventListener("click", saveArticleHandler)
+    }
+
+    // Attach event listeners for deleting articles and filtering articles by tag
+    attachEventListeners()
 }
+
+// Show all articles by resetting the selectedTag variable to null and re-rendering the article list
+const showAllArticles = () => {
+    selectedTag = null
+    document.querySelector("#articles").innerHTML = Articles()
+    initEventListeners()
+}
+
 
 // Generate the complete Articles component HTML
 export const Articles = () => {
     return `
         <div id="articles">
-        <h2>Articles</h2>
+            <h2>Articles</h2>
             ${articleList()}
             <button id="addNewArticle">+ Add new article</button>
+            <button id="showAllArticles">Show All</button>
             <form id="articleForm" class="hidden">
                 <label for="articleTitle">Title</label>
                 <input type="text" id="articleTitle" required>
@@ -89,6 +138,7 @@ export const Articles = () => {
         </div>
     `
 }
+
 
 // This function filters articles by the provided tag, updates the articles container with the filtered articles, and re-attaches event listeners
 const filterArticlesByTag = (tag) => {
