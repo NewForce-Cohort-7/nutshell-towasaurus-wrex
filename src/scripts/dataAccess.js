@@ -265,3 +265,4 @@ export const deleteEvent = (id) => {
             dashboard.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
+

@@ -12,24 +12,24 @@ const articleList = () => {
 
     // Generate HTML for each filtered article
     return filteredArticles.map(article => {
-        // Generate tag buttons for each tag in the article
-        const tagButtons = (article.tags && article.tags.length > 0 && article.tags[0] !== "") 
+        // Check if article.tags is defined and contains at least one non-empty string
+            const tagButtons = (article.tags && article.tags.length > 0 && article.tags[0] !== "") 
+        // If the condition is true, create a string of HTML button elements using the tags in article.tags
             ? article.tags.map(tag => `<button class="tag" data-tag="${tag}">${tag}</button>`).join("")
+        // If the condition is false, assign an empty string to tagButtons
             : ""
-        return `
-            <div class="article">
-                <h3>${article.title}${tagButtons ? ` ${tagButtons}` : ""}</h3>
-                <p class="articleDate">${article.date}</p>
-                <p>${article.synopsis}</p>
-                <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
-                <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
-            </div>
-        `
-    }).join("")
-}
 
-
-
+            return `
+                <div class="article">
+                    <h3>${article.title}${tagButtons ? ` ${tagButtons}` : ""}</h3>
+                    <p class="articleDate">${article.date}</p>
+                    <p>${article.synopsis}</p>
+                    <button class="openArticle"><a href="${article.url}" target="_blank">Open</a></button>
+                    <button class="deleteArticle" data-id="${article.id}">Delete Article</button>
+                </div>
+            `
+        }).join("")
+    }
 
 // Toggle visibility of the article form
 const toggleArticleForm = () => {
@@ -65,6 +65,8 @@ const initEventListeners = () => {
         } else if (event.target.classList.contains("tag")) {
             const tag = event.target.dataset.tag
             filterArticlesByTag(tag)
+        } else if (event.target.id === "showAllArticles") {
+            showAllArticles()
         }
     })
 }
