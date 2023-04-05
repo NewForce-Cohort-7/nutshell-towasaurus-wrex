@@ -9,7 +9,8 @@ const applicationState = {
     messages: [],
     photos: [],
     tasks: [],
-    chuckFact: ""
+    chuckFact: "",
+    dadJoke: {}
 }
 
 // CHUCK NORRIS FACTS
@@ -23,6 +24,40 @@ export const getChuckFact = () => {
     applicationState.chuckFact = fact
     document.dispatchEvent(new CustomEvent("stateChanged"))
   }
+
+// DAD JOKES
+// Dad Joke API 
+const dadJokeAPI = "https://dad-jokes.p.rapidapi.com/random/joke"
+
+// Dad Joke FETCH 
+export const fetchRandomJoke = () => {
+  
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '1aa399f120msh693fa9505939da3p161fb2jsnf8a0e56bdc05',
+      'X-RapidAPI-Host': 'dad-jokes.p.rapidapi.com',
+      "Content-Type": "application/json"
+    }
+  };
+
+  return fetch(`${dadJokeAPI}`, options)
+    .then(response => response.json())
+    .then(parsedResponse => {
+        applicationState.dadJoke = parsedResponse
+    })
+  }
+
+// Retrieves the current Dad Joke from the application state
+export const getDadJoke = () => {
+    return applicationState.dadJoke
+}
+
+// Sets a new Chuck Norris fact in the application state
+export const setDadJoke = (joke) => {
+    applicationState.dadJoke = joke
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
 
 export const fetchUsers = () => {
     return fetch(`${API}/users`)
