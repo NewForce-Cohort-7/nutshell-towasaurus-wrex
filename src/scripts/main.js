@@ -1,6 +1,6 @@
-import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, getChuckFact, setChuckFact } from "./dataAccess.js"
+import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, getChuckFact, setChuckFact, fetchRandomJoke } from "./dataAccess.js"
 import { createHTML } from "./createHTML.js"
-import { fetchRandomFact } from "./apiAccess.js"
+import { fetchRandomFact} from "./apiAccess.js"
 
 const dashboard = document.querySelector("#dashboard")
 
@@ -11,6 +11,7 @@ const render = () => {
         .then(() => fetchPhotos())
         .then(() => fetchMessages())
         .then(() => fetchRandomFact())
+        .then(() => fetchRandomJoke())
         .then(fact => {
             setChuckFact(fact)
         })
