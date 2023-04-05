@@ -35,7 +35,7 @@ const render = () => {
                 return !task.complete
             }).length
 
-            dashboard.innerHTML += createHTML()
+            // dashboard.innerHTML += createHTML()
             const ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
