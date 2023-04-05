@@ -1,5 +1,5 @@
 
-import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, setChuckFact, fetchRandomJoke } from "./dataAccess.js"
+import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, setChuckFact, fetchRandomJoke, getTasks } from "./dataAccess.js"
 import { createHTML } from "./createHTML.js"
 import { fetchRandomFact } from "./apiAccess.js"
 import { initEventListeners } from "./articles.js"
@@ -24,6 +24,36 @@ const render = () => {
         .then(fact => {
             setChuckFact(fact)
         })
+        .then(() => {
+            const tasks = getTasks()
+
+            const taskComplete = tasks.filter(task => {
+               return task.complete
+            }).length
+
+            const taskIncomplete = tasks.filter(task => {
+                return !task.complete
+            }).length
+
+            // dashboard.innerHTML += createHTML()
+            const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Complete', 'Incomplete'],
+      datasets: [{
+        label: 'Tasks',
+        data: [taskComplete, taskIncomplete],
+        
+      }]
+    },
+    options: {
+
+    }
+  });
+        })
+        
 }
 
 render()
