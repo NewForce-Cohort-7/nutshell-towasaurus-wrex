@@ -2,8 +2,11 @@
 import { fetchArticles, fetchEvents, fetchMessages, fetchPhotos, fetchTasks, setChuckFact } from "./dataAccess.js"
 import { createHTML } from "./createHTML.js"
 import { fetchRandomFact } from "./apiAccess.js"
+import { initEventListeners } from "./articles.js"
 
 const dashboard = document.querySelector("#dashboard")
+
+
 
 const render = () => {
     fetchArticles()
@@ -13,6 +16,8 @@ const render = () => {
         .then(() => fetchMessages())
         .then(() => {
             dashboard.innerHTML = createHTML()
+            // Initialize event listeners for the Articles component
+            initEventListeners()
             // Fetch a random Chuck Norris fact
             return fetchRandomFact()
         })
@@ -23,6 +28,7 @@ const render = () => {
 }
 
 render()
+
 
 
 dashboard.addEventListener("stateChanged", customEvent => {
