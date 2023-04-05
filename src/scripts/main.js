@@ -15,11 +15,10 @@ const render = () => {
         .then(() => fetchRandomJoke())
         .then(() => {
             // this will prevent the chuck code from cycling upon article deletion 8) 
-            // Check if the Chuck Norris fact is already set in the state
-            if (!getChuckFact()) {
-                fetchRandomFact()
-                    .then((fact) => {
-                        // Set the new fact in the application state
+            // check if the chuck norris fact is already set in the state
+            if (!getChuckFact()) { // is chuck saved in the db?
+                fetchRandomFact() // if not, fetch chuck
+                    .then((fact) => {  // set chuck in the application state
                         setChuckFact(fact)
                     })
             }
