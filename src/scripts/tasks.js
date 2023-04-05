@@ -1,5 +1,6 @@
 import { getTasks, sendTask, markTaskComplete } from "./dataAccess.js";
 
+
 const dashboard = document.querySelector("#dashboard")
 
 dashboard.addEventListener("click", clickEvent => {
@@ -31,8 +32,6 @@ const inputsAppear = () => {
 
 }
 
-
-
 dashboard.addEventListener("click", event => {
     if (event.target.id ==="createTaskButton") {
         document.querySelector("#textBoxHere").innerHTML = inputsAppear()
@@ -40,51 +39,50 @@ dashboard.addEventListener("click", event => {
 })
 
 
-
 export const createTaskBox = () => {
 const tasks = getTasks()
-// let percentage = 0
+let completedCount = 0
 let total = 0
 total = tasks.length
-let completedCount = 0
-tasks.forEach(task =>{
-    if (task.complete){
-    completedCount++
-        }
-    }
-)
-// percentage = (completedCount / total) * 100
-// if (total === 0){
-//     percentage = 0
-// }
+
+completedCount = tasks.filter(task => {
+    return task.complete
+}).length
+
 const percentage = (total > 0) ? (completedCount/total) * 100 : 0
 
 return`
+<div>
+<canvas id="myChart"></canvas>
+</div>
 <h3 id="percentComplete">Tasks Completed: ${percentage}%</h3>
 <h3>Incomplete Tasks</h3>
 
 ${tasks.map(task => {
     if(!task.complete){ 
-        return `<div class="taskContainer" id="${task.id}">
+        return `
+            <div class="taskContainer" id="${task.id}">
             <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
             <div class="task-date-container"><p class="task-date">${task.date}</p></div>
             <input type="checkbox" class="checkbox" id="completeTask--${task.id}"></input>
-            </div>`
-    }
-}).join("")
+            </div>
+            `
+        }
+    }).join("")
 }
 
 <h3>Complete Tasks</h3>
 
 ${tasks.map(task => {
     if(task.complete){ 
-        return `<div class="taskContainer" id="${task.id}">
+        return `
+            <div class="taskContainer" id="${task.id}">
             <div class="task-text-container"><p class="task-text">${task.description}</p></div> 
             <div class="task-date-container"><p class="task-date">${task.date}</p></div>
             </div>
             `
-    }
-}).join("")
+        }
+    }).join("")
 }
 
 
@@ -94,14 +92,13 @@ ${tasks.map(task => {
 </div>
 `
 }
-
-
-
+  
 dashboard.addEventListener("click", click => {
     if (click.target.id.startsWith("completeTask--")) {
         const [,taskId] = click.target.id.split("--")
         markTaskComplete(parseInt(taskId))
     }
 })
+
 
 
