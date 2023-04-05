@@ -14,16 +14,12 @@ const render = () => {
         .then(() => fetchTasks())
         .then(() => fetchPhotos())
         .then(() => fetchMessages())
-        .then(() => {
-            dashboard.innerHTML = createHTML()
-            // Initialize event listeners for the Articles component
-            initEventListeners()
-            // Fetch a random Chuck Norris fact
-            return fetchRandomFact()
-        })
-        // Set the fact in the application state
+        .then(() => fetchRandomFact())
         .then(fact => {
             setChuckFact(fact)
+        })
+        .then(() => {
+            dashboard.innerHTML = createHTML()
         })
 }
 
